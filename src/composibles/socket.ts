@@ -3,9 +3,10 @@ import { ref } from "vue";
 export function useSocket() {
     const ws = ref<any>()
 
-
-    const initSocket = (url: string, token?: string) => {
+    const connectSocket = () => {
         return new Promise(function(resolve, reject) {
+            const url = 'wss://echo.websocket.org'
+
             const server = new WebSocket(url);
 
             server.onopen = function() {
@@ -16,14 +17,6 @@ export function useSocket() {
                 reject(err);
             };
         });
-    }
-
-    const connectSocket = async (url = 'wss://echo.websocket.org', token?: string) => {
-        try {
-            ws.value = await initSocket(url, token)
-        } catch (e) {
-            throw e
-        }
     }
 
     const closeSocket = async () => {
