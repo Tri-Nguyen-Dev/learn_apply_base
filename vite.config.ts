@@ -7,6 +7,12 @@ import {marked} from 'marked';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    headers: {
+      'Cross-Origin-Opener-Policy': 'unsafe-none',
+      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+    },
+  },
   plugins: [
     vue(),
     vueJsx(),
