@@ -10,7 +10,7 @@ export function useFilter<T>(list: T[]) {
                 const filterValue = filters.value[key];
                 const filterFunction = filterFunctions.value[key];
 
-                if (filterFunction && filterValue !== undefined && filterValue !== null) {
+                if (filterFunction && filterValue !== undefined && filterValue !== null && filterValue !== '') {
                     return filterFunction(item, filterValue);
                 }
 
