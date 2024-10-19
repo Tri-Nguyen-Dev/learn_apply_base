@@ -4,7 +4,8 @@
 <!--    <Sidebar />-->
 <!--    <ChartMessageChat />-->
 
-    <Filter />
+<!--    <Typing />-->
+    <Progress />
   </div>
 </template>
 
@@ -12,4 +13,6 @@
 import Sidebar from "@/components/sidebar/Sidebar.vue";
 import ChartMessageChat from "@/components/ChartMessageChat.vue";
 import Filter from "@/components/Filter.vue";
+import Typing from "@/components/Typing.vue";
+import Progress from "@/components/Progress.vue";
 </script>
