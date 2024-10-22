@@ -4,8 +4,8 @@
 <!--    <Sidebar />-->
 <!--    <ChartMessageChat />-->
 
-<!--    <Typing />-->
-    <Progress />
+    <Typing />
+<!--    <Progress />-->
   </div>
 </template>
 

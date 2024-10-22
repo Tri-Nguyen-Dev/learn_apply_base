@@ -16,17 +16,21 @@
 
       <div ref="scrollAnchor"></div>
     </div>
-    <input
-        v-model="newMessage"
-        :disabled="isFirstMessageTyping"
-        @keyup.enter="sendNewMessage"
+
+    <n-input
+        v-model:value="newMessage"
+        type="textarea"
         placeholder="Enter your message..."
+        @keyup.enter="sendNewMessage"
+        :disabled="isFirstMessageTyping"
+        rows="2"
     />
   </div>
 </template>
 
 <script>
 import { ref, nextTick, computed } from 'vue';
+import { NInput } from 'naive-ui'
 
 export default {
   setup() {
