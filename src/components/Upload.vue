@@ -30,6 +30,13 @@ const onAuthApiLoad = () => {
   });
 };
 
+gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse().then(authResponse => {
+  const newAccessToken = authResponse.access_token;
+  localStorage.setItem('accessToken', newAccessToken);
+  console.log('Token refreshed.');
+});
+
+
 const onPickerApiLoad = () => {
   pickerApiLoaded.value = true;
 };
