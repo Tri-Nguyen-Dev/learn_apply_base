@@ -4,8 +4,10 @@
 <!--    <Sidebar />-->
 <!--    <ChartMessageChat />-->
 
-    <Typing />
+<!--    <Typing />-->
 <!--    <Progress />-->
+
+    <TreeSelect />
   </div>
 </template>
 
@@ -15,4 +17,5 @@ import ChartMessageChat from "@/components/ChartMessageChat.vue";
 import Filter from "@/components/Filter.vue";
 import Typing from "@/components/Typing.vue";
 import Progress from "@/components/Progress.vue";
+import TreeSelect from "@/components/TreeSelect.vue";
 </script>
