@@ -3,6 +3,7 @@ import './assets/main.scss'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import naive from 'naive-ui'
+import 'highlight.js/styles/github-dark.css';
 
 import App from './App.vue'
 import router from './router'

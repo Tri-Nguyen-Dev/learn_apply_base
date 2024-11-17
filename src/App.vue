@@ -7,7 +7,11 @@
 <!--    <Typing />-->
 <!--    <Progress />-->
 
-    <TreeSelect />
+    <Code />
+
+<!--    <TreeSelect />-->
+
+<!--    <Performance />-->
   </div>
 </template>
 
@@ -18,4 +22,6 @@ import Filter from "@/components/Filter.vue";
 import Typing from "@/components/Typing.vue";
 import Progress from "@/components/Progress.vue";
 import TreeSelect from "@/components/TreeSelect.vue";
+import Performance from "@/components/Performance.vue";
+import Code from "@/components/Code.vue";
 </script>

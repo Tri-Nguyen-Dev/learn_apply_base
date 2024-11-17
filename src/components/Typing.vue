@@ -71,7 +71,7 @@ export default {
 
       // Continue processing the queue after the current message is completed
       if (messageQueue.value.length > 0) {
-        processQueue();
+        await processQueue();
       }
     };
 
@@ -149,14 +149,6 @@ export default {
       }
     }
 
-
-    const scrollToBottom = () => {
-      const anchor = scrollAnchor.value;
-      if (anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth' });
-      }
-    };
-
     const onScroll = () => {
       const container = messageContainer.value;
       const isAtBottom = container.scrollHeight - container.scrollTop === container.clientHeight;
@@ -205,7 +197,6 @@ export default {
   text-align: end;
   display: inline-flex;
   justify-content: end;
-  background-color: #cccccc;
 
   border-radius: 8px;
   padding: 6px 10px;
@@ -216,5 +207,6 @@ input {
   height: 40px;
   border: 1px solid #ccc;
   padding: 12px;
+  background-color: #000000;
 }
 </style>
