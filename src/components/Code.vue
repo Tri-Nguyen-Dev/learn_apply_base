@@ -1,12 +1,53 @@
 <template>
-  <div v-html="marked.parse(markdownContent)" class="markdown-content"></div>
+  <div>
+    <div v-html="marked.parse(markdownContent)" class="markdown-content"></div>
+<!--    <Test ref="testRef" />-->
+
+<!--    <n-button @click="handleTest"></n-button>-->
+  </div>
 </template>
 
 <script setup>
-import {ref} from 'vue'
-import { Marked } from "marked";
+import {onMounted, ref} from 'vue'
+import {Marked} from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from 'highlight.js';
+
+function handleGlobalClick(event) {
+  const target = event.target;
+  if (target.matches('.block-code__copy[data-action="copy"]')) {
+    const codeBlock = target.closest('.block-code');
+
+    if (codeBlock) {
+      const code = codeBlock.querySelector('pre code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert('Code copied!');
+      });
+    }
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleGlobalClick);
+})
+
+onMounted(() => () => {
+  document.removeEventListener('click', handleGlobalClick);
+})
+
+const renderer = {
+  code(token)  {
+    return `
+            <div class="block-code">
+                <div class="block-code__header">
+                    <span>${token?.lang}</span>
+                    <span class="block-code__copy" data-action="copy">Copy code</span>
+                </div>
+                <pre><code class="hljs language-${token.lang}">${token.text}</code></pre>
+            </div>
+           `
+  }
+};
 
 const marked = new Marked(
     markedHighlight({
@@ -19,16 +60,7 @@ const marked = new Marked(
     })
 );
 
-function handleLinkClick(event) {
-  const target = event.target
-  if (target.tagName === 'A') {
-    const href = target.getAttribute('href');
-    if (href) {
-      // Xử lý sự kiện click tại đây
-      event.preventDefault();
-    }
-  }
-}
+marked.use({ renderer });
 
 // Nội dung Markdown ví dụ
 const markdownContent = ref(`
@@ -61,12 +93,26 @@ console.log('Hello, world!');
 `);
 </script>
 
-<style scoped>
+<style >
 .markdown-content {
   padding: 16px;
   background-color: #2d2d2d;
   color: #ccc;
   border-radius: 8px;
   overflow-x: auto;
+}
+
+.block-code__header {
+  height: 36px;
+  width: 100%;
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 12px;
+  align-items: center;
+}
+
+.block-code__copy {
+  cursor: pointer;
 }
 </style>
