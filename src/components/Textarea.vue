@@ -2,24 +2,26 @@
   <div class="wrap">
 
 
-    <button @click="isOpen = !isOpen">
+    <button @click="handleCollapse">
       Toggle Collapse
     </button>
 
-    <div v-for="(item, index) in items" :key="index">
-      <div v-for="(item2, index2) in item.required" :key="index2" class="item">
+    <div ref="collapse" class="collapse-he">
+      <div v-for="(item, index) in items" :key="index">
+        <div v-for="(item2, index2) in item.required" :key="index2" class="item">
          <textarea
              v-model="item2.value"
              ref="textAreas"
              class="auto-height"
          />
-        <n-checkbox-group v-if="item2?.options?.length" v-model:value="item2.value">
-          <n-space item-style="display: flex;">
-            <n-checkbox v-for="option in item2?.options" :value="option" :label="option" />
-          </n-space>
-        </n-checkbox-group>
-      </div>
+          <n-checkbox-group v-if="item2?.options?.length" v-model:value="item2.value">
+            <n-space item-style="display: flex;">
+              <n-checkbox v-for="option in item2?.options" :value="option" :label="option" />
+            </n-space>
+          </n-checkbox-group>
+        </div>
 
+      </div>
     </div>
 
     <button @click="addValue">Add Value</button>
@@ -40,7 +42,7 @@ export default {
         required: [
           {
             title:'1',
-            value:'',
+            value:'Tham chiếu đến tất cả textarea Tham chiếu đến tất cả textarea',
             options: [
               'Beijing',
               ' Shanghai',
@@ -78,6 +80,17 @@ export default {
       }
     ]);
     const textAreas = ref([]);
+    const collapse = ref(null);
+
+    const handleCollapse = () => {
+      isOpen.value = !isOpen.value;
+      if(isOpen.value) {
+        collapse.value.style.maxHeight =  collapse.value.scrollHeight + "px";
+      }
+      else {
+        collapse.value.style.maxHeight = 0;
+      }
+    }
 
     const adjustHeight = (index) => {
       const textarea = textAreas.value[index];
@@ -111,7 +124,9 @@ export default {
       adjustHeight,
       addValue,
       Collapse,
-      isOpen
+      isOpen,
+      handleCollapse,
+      collapse
     };
   },
 };
@@ -131,5 +146,11 @@ export default {
 
 .wrap {
   padding: 24px;
+}
+
+.collapse-he {
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
+  overflow: hidden;
 }
 </style>
