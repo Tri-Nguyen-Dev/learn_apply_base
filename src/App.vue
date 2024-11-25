@@ -7,8 +7,8 @@
 <!--    <Typing />-->
 <!--    <Progress />-->
 
-    <Code />
-
+<!--    <Code />-->
+<Textarea />
 <!--    <TreeSelect />-->
 
 <!--    <Performance />-->
@@ -24,4 +24,5 @@ import Progress from "@/components/Progress.vue";
 import TreeSelect from "@/components/TreeSelect.vue";
 import Performance from "@/components/Performance.vue";
 import Code from "@/components/Code.vue";
+import Textarea from "@/components/Textarea.vue";
 </script>
