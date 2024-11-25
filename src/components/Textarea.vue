@@ -7,20 +7,15 @@
     </button>
 
     <div v-for="(item, index) in items" :key="index">
-
       <div v-for="(item2, index2) in item.required" :key="index2" class="item">
          <textarea
              v-model="item2.value"
              ref="textAreas"
              class="auto-height"
          />
-        <n-checkbox-group v-model:value="item2.value">
+        <n-checkbox-group v-if="item2?.options?.length" v-model:value="item2.value">
           <n-space item-style="display: flex;">
-            <n-checkbox value="Beijing" label="Beijing" />
-            <n-checkbox value="Shanghai" label="Shanghai" />
-            <n-checkbox value="Guangzhou" label="Guangzhou" />
-            <n-checkbox value="Shenzhen" label="Shenzhen" />
-            <n-checkbox value="ddddddddddddd" label="dddddddddd" />
+            <n-checkbox v-for="option in item2?.options" :value="option" :label="option" />
           </n-space>
         </n-checkbox-group>
       </div>
@@ -45,15 +40,23 @@ export default {
         required: [
           {
             title:'1',
-            value:''
+            value:'',
+            options: [
+              'Beijing',
+              ' Shanghai',
+              ' Guangzhou',
+              ' Shenzhen',
+            ]
           },
           {
             title:'1',
-            value:''
+            value:'',
+            options: []
           },
           {
             title:'1',
-            value:''
+            value:'',
+            options: []
           }
         ]
       },
@@ -118,12 +121,12 @@ export default {
 .auto-height {
   margin-top: 24px;
   height: 22px;
-  overflow: hidden;
   resize: none;
 
   background: #000;
   color: #fff;
   border: 1px solid #ccc;
+  max-height: 100px;
 }
 
 .wrap {
