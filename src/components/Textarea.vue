@@ -13,8 +13,9 @@
              v-model="item2.value"
              ref="textAreas"
              class="auto-height"
+             @input="item2.valueSelect = []"
          />
-          <n-checkbox-group v-if="item2?.options?.length" v-model:value="item2.value">
+          <n-checkbox-group v-if="item2?.options?.length" v-model:value="item2.valueSelect" @update:value="(e) => handleChange(e, item2)">
             <n-space item-style="display: flex;">
               <n-checkbox v-for="option in item2?.options" :value="option" :label="option" />
             </n-space>
@@ -45,9 +46,12 @@ export default {
             value:'Tham chiếu đến tất cả textarea Tham chiếu đến tất cả textarea',
             options: [
               'Beijing',
-              ' Shanghai',
-              ' Guangzhou',
-              ' Shenzhen',
+              'Shanghai',
+              'Guangzhou',
+              'Shenzhen',
+            ],
+            valueSelect: [
+              'Beijing'
             ]
           },
           {
@@ -81,6 +85,10 @@ export default {
     ]);
     const textAreas = ref([]);
     const collapse = ref(null);
+
+    const handleChange = (e, item) => {
+      item.value = e.join(', ').trim()
+    }
 
     const handleCollapse = () => {
       isOpen.value = !isOpen.value;
@@ -126,7 +134,8 @@ export default {
       Collapse,
       isOpen,
       handleCollapse,
-      collapse
+      collapse,
+      handleChange
     };
   },
 };
